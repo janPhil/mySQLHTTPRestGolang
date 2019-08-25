@@ -1,8 +1,13 @@
 package main
 
+import (
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/janPhil/mySQLHTTPRestGolang/server"
+)
+
 func main() {
 
-	s := NewServer()
+	s := server.NewServer()
 	s.StartServer()
 
 }
