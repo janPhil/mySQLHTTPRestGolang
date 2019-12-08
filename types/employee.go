@@ -1,4 +1,4 @@
-package models
+package types
 
 import (
 	"database/sql"
@@ -15,13 +15,17 @@ type Employee struct {
 
 // AllEmployees returns all employees found in the database
 func AllEmployees(db *sql.DB) ([]*Employee, error) {
-
+	/* db, err := sql.Open("sqlite3", "./development.db")
+	defer db.Close()
+	if err != nil {
+		return nil, err
+	} */
 	employees := make([]*Employee, 0)
 	rows, err := db.Query("SELECT * FROM employees")
-	if err != nil {
-		log.Fatal(err)
-	}
 	defer rows.Close()
+	if err != nil {
+		log.Fatalf("Could not get from database %v", err)
+	}
 	for rows.Next() {
 		tmp := new(Employee)
 		err := rows.Scan(&tmp.ID, &tmp.FirstName, &tmp.LastName, &tmp.Salary)

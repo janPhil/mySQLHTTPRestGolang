@@ -1,4 +1,4 @@
-package models
+package database
 
 import (
 	"database/sql"
@@ -7,8 +7,7 @@ import (
 
 // InitDatabase initializes the database - Only to call if one needs a new database
 func InitDatabase() {
-	var err error
-	db, err = sql.Open("mysql", "root:test@tcp(127.0.0.1:3306)/employees")
+	db, err := sql.Open("mysql", "root:test@tcp(127.0.0.1:3306)/employees")
 	if err != nil {
 		fmt.Printf("Could not connect to database %v", err)
 	}
@@ -30,8 +29,7 @@ func InsertSampleData() {
 	}
 
 	joe := employee{firstName: "Joe", lastName: "Sample", salary: 50000}
-	var err error
-	db, err = sql.Open("mysql", "root:test@tcp(127.0.0.1:3306)/employees")
+	db, err := sql.Open("mysql", "root:test@tcp(127.0.0.1:3306)/employees")
 	if err != nil {
 		fmt.Printf("Could not connect to database %v", err)
 	}
